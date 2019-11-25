@@ -1,0 +1,25 @@
+@import '/variable.styl'
+.tab-head
+    background #ffffff
+    position relative
+    border-radius 6px
+    padding $mt20
+    padding-bottom 10px
+    margin-bottom 20px
+    font-size $ft14
+    color $ft-color
+    line-height 32px
+    .tab-head-list
+        .tab-list-item
+            display flex
+            margin-bottom $padding-size-middle-x
+            height 32px
+            line-height 32px
+           .left_label
+                display inline-block
+                text-align right
+                margin-right 10px
+                flex 0 0 70px
+            &:nth-child(2){
+              flex:0 1 atuo 
+            }

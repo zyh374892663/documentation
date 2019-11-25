@@ -6,6 +6,7 @@ module.exports = {
     ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
   ],
   base: '/docs/', // 这是部署到github相关的配置 下面会讲
+  dest: './dist',
   markdown: {
     lineNumbers: true // 代码块显示行号
   },
@@ -13,7 +14,7 @@ module.exports = {
     // 添加导航栏
     nav: [
       { text: '主页', link: '/' }, // 导航条
-      { text: '组件文档', link: '/components/' },
+      { text: '组件文档', link: '/moduleMd/' },
       { text: '知识库', link: '/knowledge/' },
       {
         text: 'github',    // 这里是下拉列表展现形式。
@@ -25,16 +26,27 @@ module.exports = {
     ],
     // 为以下路由添加侧边栏
     sidebar: {
-      '/baseComponents/': [
-        'MyConfirm',
-        'BatchUploading',
-        'HeadFilter',
-        'Form'
-      ],
-      '/css/': [
-        'three',
-        'four'
+      // 侧边栏在 /guide/ 上
+      '/moduleMd/': [
+        {
+          title: '自定义组件',
+          collapsable: false,
+          children: [
+            '',
+            'HeadFilter',
+            'BatchUploading',
+            'Form'
+          ]
+        }
       ]
+    },
+    lastUpdated: 'Last Updated'
+  },
+  markdown: {
+    // options for markdown-it-anchor
+    anchor: { permalink: false },
+    config: md => {
+      md.use(require("markdown-it-katex"));
     }
   }
 }
