@@ -24,6 +24,7 @@ title: 'HeadFilter'
   :btn-group="3"
   :input-col-size="2"
   :data-setting="queryConditionList"
+  :label-width="100"
   @query="onQuery"
 />
 ```html
@@ -33,6 +34,7 @@ title: 'HeadFilter'
   :btn-group="3"
   :input-col-size="2"
   :data-setting="queryConditionList"
+  :label-width="100"
   @query="onQuery"
 />
 ```
@@ -43,10 +45,53 @@ export default {
     return {
       queryConditionList: [
         { label: '酒店编号/名称', type: 'input', key: 'a', value: '' },
+        { label: '酒店编号/名称', type: 'inputSearch', key: 'hotelCode', value: '', options: [
+          { label: 'a酒店', value: '1' },
+          { label: 'b酒店', value: '2' }
+        ] },
+        { label: '统计时间', type: 'daterange', key: 'data', value: null, props: {
+          pickerOptions: {
+            disabledDate(time) {
+              return time.getTime() > Date.now()
+            }
+          }
+        },
+        { label: '战区', type: 'warZone', key: 'b', value: null, options: [
+          {
+            children: [
+              { id: 9, nodeCode: null, nodeName: "黑龙江城市群", masterId: "247", masterName: "崔志佳" }
+            ],
+            id: 1,
+            masterId: "29",
+            masterName: "xcx_yunying",
+            nodeCode: null,
+            nodeName: "一战区",
+            updateTime: "2019-11-22 10:14:16"
+          },
+          {
+            children: [
+              { id: 9, nodeCode: null, nodeName: "黑龙江城市群", masterId: "247", masterName: "崔志佳" }
+            ],
+            id: 1,
+            masterId: "29",
+            masterName: "xcx_yunying",
+            nodeCode: null,
+            nodeName: "二战区",
+            updateTime: "2019-11-22 10:14:16"
+          }
+        ], props: {
+          options: {
+            multiple: true,
+            value: 'id',
+            label: 'nodeName',
+            checkStrictly: false
+          }
+        }
+        },
         {
           label: '审核状态',
           type: 'select',
-          key: 'b',
+          key: 'c',
           value: '',
           options: [
             { label: '待审核', value: 2 },
@@ -74,10 +119,10 @@ export default {
 label         | 标题                        | 无
 key           | 生成form的key，用于返回给父组件 | 无
 value         | 回现或展示数据                | 无
-type          | input类型                   | input、select
+type          | 类型                   | input、select、daterange、warZone、inputSearch
 placeholder   | placeholder提示信息          | 请选择 or 无
 disabled      | 是否禁用                     | false
-options       | 下拉框、单选、多选枚举值        | 无
+options       | 下拉框、单选、多选枚举值、搜索  | 无
 
 #### 事件
 事件               | 描述           
@@ -91,10 +136,52 @@ export default {
     return {
       queryConditionList: [
         { label: '酒店编号/名称', type: 'input', key: 'b', value: '' },
+        { label: '酒店编号/名称', type: 'inputSearch', key: 'hotelCode', value: '', options: [
+          { label: 'a酒店', value: '1' },
+          { label: 'b酒店', value: '2' }
+        ] },
+        { label: '统计时间', type: 'daterange', key: 'data', value: null, props: {
+          pickerOptions: {
+            disabledDate(time) {
+              return time.getTime() > Date.now()
+            }
+          }}
+        },
+        { label: '战区', type: 'warZone', key: 'c', value: null, options: [
+          {
+            children: [
+              { id: 9, nodeCode: null, nodeName: "黑龙江城市群", masterId: "247", masterName: "崔志佳" }
+            ],
+            id: 1,
+            masterId: "29",
+            masterName: "xcx_yunying",
+            nodeCode: null,
+            nodeName: "一战区",
+            updateTime: "2019-11-22 10:14:16"
+          },
+          {
+            children: [
+              { id: 9, nodeCode: null, nodeName: "黑龙江城市群", masterId: "247", masterName: "崔志佳" }
+            ],
+            id: 1,
+            masterId: "29",
+            masterName: "xcx_yunying",
+            nodeCode: null,
+            nodeName: "二战区",
+            updateTime: "2019-11-22 10:14:16"
+          }
+        ], props: {
+          options: {
+            multiple: true,
+            value: 'id',
+            label: 'nodeName',
+            checkStrictly: false
+          }}
+        },
         {
           label: '审核状态',
           type: 'select',
-          key: 'c',
+          key: 'd',
           value: '',
           options: [
             { label: '待审核', value: 2 },
